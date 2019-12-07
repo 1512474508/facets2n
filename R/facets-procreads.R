@@ -138,11 +138,13 @@ counts2logROR <- function(mat, gbuild, unmatched=FALSE, MandUnormal=FALSE, f, sp
     # compute cn log-ratio (gc corrected) and baf log odds-ratio
     #####################################
     #square root transform count vectors.
-    tumor_sqrt = sqrt(rCountT)
+#     tumor_sqrt = sqrt(rCountT)
+    tumor_sqrt = rCountT
     tumor_sqrt.auto = tumor_sqrt[-x.idx]
     tumor_sqrt.x    = tumor_sqrt[x.idx]
 
-    normal_sqrt      = sqrt(rCountN)
+#     normal_sqrt      = sqrt(rCountN)
+    normal_sqrt      = rCountN
     normal_sqrt.auto = normal_sqrt[-x.idx]
     normal_sqrt.x    = normal_sqrt[x.idx]
 
