@@ -154,14 +154,15 @@ counts2logROR <- function(mat, gbuild, unmatched=FALSE, MandUnormal=FALSE, f, sp
     fit<-loess_tumor.auto$y[jj]
     #loess_tumor.auto <-loess(tumor_sqrt.auto~gcpct.auto,span=f);
    # temp<-predict(loess_tumor.auto);
-    normalized_t.auto<-(tumor_sqrt.auto-fit+median(tumor_sqrt.auto))/(median(tumor_sqrt.auto[which(tumor_sqrt.auto != 0)]));
+#     normalized_t.auto<-(tumor_sqrt.auto-fit+median(tumor_sqrt.auto))/(median(tumor_sqrt.auto[which(tumor_sqrt.auto != 0)]));
+    normalized_t.auto <- tumor_sqrt.auto - fit + median(tumor_sqrt.auto);
 
     loess_tumor.x <-lowess(gcpct.x,tumor_sqrt.x,f=spanT);
     jj=match(gcpct.x, loess_tumor.x$x)
     fit<-loess_tumor.x$y[jj]
     #temp<-predict(loess_tumor.x);
 #     normalized_t.x<-(tumor_sqrt.x-fit+median(tumor_sqrt.x))/(median(tumor_sqrt.x[which(tumor_sqrt.x != 0)]));
-    normalized_t.x<-(tumor_sqrt.x-fit+median(tumor_sqrt.x));
+    normalized_t.x <- tumor_sqrt.x - fit + median(tumor_sqrt.x);
 
     tumor_rt = c(normalized_t.auto, normalized_t.x)
 
@@ -170,18 +171,20 @@ counts2logROR <- function(mat, gbuild, unmatched=FALSE, MandUnormal=FALSE, f, sp
    # temp<-predict(loess_normal.auto);
     jj=match(gcpct.auto, loess_normal.auto$x)
     fit<-loess_normal.auto$y[jj]
-    normalized_n.auto<-(normal_sqrt.auto-fit+median(normal_sqrt.auto))/(median(normal_sqrt.auto[which(normal_sqrt.auto != 0)]));
-
+#     normalized_n.auto<-(normal_sqrt.auto-fit+median(normal_sqrt.auto))/(median(normal_sqrt.auto[which(normal_sqrt.auto != 0)]));
+    normalized_n.auto <- normal_sqrt.auto - fit + median(normal_sqrt.auto)
+    
     loess_normal.x <-lowess(gcpct.x,normal_sqrt.x,f=spanX);
     jj=match(gcpct.x, loess_normal.x$x)
     fit<-loess_normal.x$y[jj]
     #temp<-predict(loess_normal.x);
-    normalized_n.x<-(normal_sqrt.x-fit+median(normal_sqrt.x))/(median(normal_sqrt.x[which(normal_sqrt.x != 0)]));
-
+#     normalized_n.x <- (normal_sqrt.x-fit+median(normal_sqrt.x))/(median(normal_sqrt.x[which(normal_sqrt.x != 0)]));
+    normalized_n.x <- normal_sqrt.x - fit + median(normal_sqrt.x);
+    
     normal_rt = c(normalized_n.auto, normalized_n.x)
 
     #calculate log2 ratios
-    print('Hello')
+    print('Hi')
     cnlr = log2(1+tumor_rt) - log2(1+normal_rt)
 
     #####################################
