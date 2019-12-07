@@ -160,7 +160,8 @@ counts2logROR <- function(mat, gbuild, unmatched=FALSE, MandUnormal=FALSE, f, sp
     jj=match(gcpct.x, loess_tumor.x$x)
     fit<-loess_tumor.x$y[jj]
     #temp<-predict(loess_tumor.x);
-    normalized_t.x<-(tumor_sqrt.x-fit+median(tumor_sqrt.x))/(median(tumor_sqrt.x[which(tumor_sqrt.x != 0)]));
+#     normalized_t.x<-(tumor_sqrt.x-fit+median(tumor_sqrt.x))/(median(tumor_sqrt.x[which(tumor_sqrt.x != 0)]));
+    normalized_t.x<-(tumor_sqrt.x-fit+median(tumor_sqrt.x));
 
     tumor_rt = c(normalized_t.auto, normalized_t.x)
 
