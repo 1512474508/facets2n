@@ -180,6 +180,7 @@ counts2logROR <- function(mat, gbuild, unmatched=FALSE, MandUnormal=FALSE, f, sp
     normal_rt = c(normalized_n.auto, normalized_n.x)
 
     #calculate log2 ratios
+    print('Hello')
     cnlr = log2(1+tumor_rt) - log2(1+normal_rt)
 
     #####################################
